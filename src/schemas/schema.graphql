@@ -3,13 +3,33 @@ type User {
     name: String!
     email: String!
     category: [Category]
+    brand: [Brand]
+    product: [Product]
 }
 
 type Category {
     id: ID!
     name: String!
-    user: User
+    user: User!
     icon: String
+}
+
+type Brand {
+    id: ID!
+    name: String!
+    image: String
+    user: User!
+}
+
+type Product {
+    id: ID!
+    name: String!
+    price: Int!
+    description: String!
+    image: String!
+    category: Category!
+    user: User!
+    brand: Brand!
 }
 
 type Query {
@@ -17,11 +37,19 @@ type Query {
     user(id: ID!): User
     categories: [Category!]!
     category(id: ID!): Category
+    brands: [Brand!]!
+    brand(id: ID!): Brand
+    products: [Product!]!
+    product(id: ID!): Product
 }
 
 type Mutation {
     createUser(name: String!, email: String!): User
     updateUser(id: String!, name: String, email: String): User
-    createCategory(name: String!, user: ID!, icon: String): Category
+    createCategory(name: String!, user: ID, icon: String): Category
     updateCategory(id: String!, name: String, user: ID, icon: String): Category
+    createBrand(name: String!, image: String!, user: ID!): Brand
+    updateBrand(id: String!, name: String, image: String, user: ID): Brand
+    createProduct(name: String!, price: Int!, description: String!, image: String!, category: ID!, user: ID!, brand: ID!): Product
+    updateProduct(id: String!, name: String, price: Int, description: String, image: String, category: ID, user: ID, brand: ID): Product
 }

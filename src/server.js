@@ -9,7 +9,6 @@ mongoose.connect('mongodb://localhost:27017/graphqlnode', {
 });
 
 const server = new GraphQLServer({
-    // typeDefs: path.resolve(__dirname, 'schema.graphql'),
     typeDefs: schemas,
     resolvers
 });
