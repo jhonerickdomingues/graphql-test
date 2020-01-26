@@ -1,0 +1,27 @@
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    category: [Category]
+}
+
+type Category {
+    id: ID!
+    name: String!
+    user: User
+    icon: String
+}
+
+type Query {
+    users: [User!]!
+    user(id: ID!): User
+    categories: [Category!]!
+    category(id: ID!): Category
+}
+
+type Mutation {
+    createUser(name: String!, email: String!): User
+    updateUser(id: String!, name: String, email: String): User
+    createCategory(name: String!, user: ID!, icon: String): Category
+    updateCategory(id: String!, name: String, user: ID, icon: String): Category
+}
